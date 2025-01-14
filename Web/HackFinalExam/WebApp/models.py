@@ -12,3 +12,4 @@ class Question(models.Model):
 class Info(models.Model):
     telegram_group = models.CharField(max_length=255,null=True,blank=True)
     no_group = models.BooleanField(default=True)
+    program = models.FileField(null=True,blank=True)

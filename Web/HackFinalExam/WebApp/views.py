@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse
+from django.http import JsonResponse,HttpResponse,FileResponse
 from django.views.decorators.csrf import csrf_exempt
 from .bot import *
+import os
 from .models import *
 # Create your views here.
 @csrf_exempt
@@ -44,3 +45,8 @@ def Api_Get_Answer(request,query):
             return HttpResponse('wait')
 
     return HttpResponse('error')
+
+@csrf_exempt
+def DownloadFile(request):
+    info = Info.objects.last()
+    return FileResponse(info.program.open('rb'), as_attachment=True, filename=info.program.name)
